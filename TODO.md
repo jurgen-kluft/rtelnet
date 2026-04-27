@@ -1,4 +1,4 @@
-# rdno_telnet
+# rtelnet
 
 - telnet stream
 - unittests for some parts

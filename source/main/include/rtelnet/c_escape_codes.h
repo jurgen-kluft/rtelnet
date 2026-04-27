@@ -1,8 +1,8 @@
 
-#ifndef __RDNO_DEBUG_ESCAPE_CODES_H__
-#define __RDNO_DEBUG_ESCAPE_CODES_H__
+#ifndef __ARDUINO_DEBUG_ESCAPE_CODES_H__
+#define __ARDUINO_DEBUG_ESCAPE_CODES_H__
 
-#include "rdno_core/c_str.h"
+#include "rcore/c_str.h"
 
 #define ANSI_BLACK          0
 #define ANSI_RED            1

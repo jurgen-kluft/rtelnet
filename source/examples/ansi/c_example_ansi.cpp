@@ -1,8 +1,8 @@
 #include "Arduino.h"
 
-#include "rdno_core/c_str.h"
-#include "rdno_debug/c_telnet.h"
-#include "rdno_debug/c_escape_codes.h"
+#include "rcore/c_str.h"
+#include "rdebug/c_telnet.h"
+#include "rdebug/c_escape_codes.h"
 
 #define SERIAL_SPEED  9600
 #define WIFI_SSID     "MY SSID"

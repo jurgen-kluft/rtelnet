@@ -2,7 +2,7 @@ package main
 
 import (
 	ccode "github.com/jurgen-kluft/ccode"
-	cpkg "github.com/jurgen-kluft/rdno_telnet/package"
+	cpkg "github.com/jurgen-kluft/rtelnet/package"
 )
 
 func main() {
