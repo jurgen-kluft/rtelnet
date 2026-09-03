@@ -1,7 +1,7 @@
 package rtelnet
 
 import (
-	denv "github.com/jurgen-kluft/ccode/denv"
+	denv "github.com/jurgen-kluft/go-ide/denv"
 	rcore "github.com/jurgen-kluft/rcore/package"
 	rwifi "github.com/jurgen-kluft/rwifi/package"
 )
