@@ -1,3 +1,6 @@
+#include "rtelnet/c_telnet.h"
+
+#if defined(TARGET_ARDUINO)
 
 #include "Arduino.h"
 #if defined(TARGET_ESP32)
@@ -15,9 +18,6 @@
 #include "rcore/c_network.h"
 #include "rcore/c_str.h"
 #include "rcore/c_timer.h"
-
-#include "rtelnet/c_telnet.h"
-
 
 using TCPClient = WiFiClient;
 using TCPServer = WiFiServer;
@@ -59,10 +59,10 @@ namespace ncore
         u64 m_last_status_check;
         u32 m_failedWrites;
 
-        telnet_func_cb m_on_connect;
-        telnet_func_cb m_on_reconnect;
-        telnet_func_cb m_on_disconnect;
-        telnet_func_cb m_on_connection_attempt;
+        telnet_func_cb  m_on_connect;
+        telnet_func_cb  m_on_reconnect;
+        telnet_func_cb  m_on_disconnect;
+        telnet_func_cb  m_on_connection_attempt;
         telnet_input_cb m_on_input;
     };
 
@@ -145,11 +145,10 @@ namespace ncore
 
     void telnetHandleExistingConnection(TCPClient& newClient);
 
-    void telnetConnectClient(TCPClient& c, bool triggerEvent=true);
-    void telnetDisconnectClient(bool triggerEvent=true);
+    void telnetConnectClient(TCPClient& c, bool triggerEvent = true);
+    void telnetDisconnectClient(bool triggerEvent = true);
 
     bool telnetIsConnected();
-
 
     void telnetLoop()
     {
@@ -261,9 +260,9 @@ namespace ncore
 #elif defined(TARGET_ESP32)
         // ESP32 implementation with timeout to ensure data transmission
         gTelnet.m_client.flush();
-        u64 startTime         = ntimer::millis();
-        size_t       previousAvailable = 0;
-        size_t       stableCount       = 0;
+        u64    startTime         = ntimer::millis();
+        size_t previousAvailable = 0;
+        size_t stableCount       = 0;
 
         // Wait for data to be transmitted by monitoring available write buffer
         while (ntimer::millis() - startTime < static_cast<u64>(telnetGetKeepAliveInterval()))
@@ -338,7 +337,7 @@ namespace ncore
     void telnetConnectClient(TCPClient& c, bool triggerEvent)
     {
         gTelnet.m_client = c;
-        gTelnet.m_ip = gTelnet.m_client.remoteIP();
+        gTelnet.m_ip     = gTelnet.m_client.remoteIP();
         gTelnet.m_client.setNoDelay(true);
         gTelnet.m_client.setTimeout(telnetGetKeepAliveInterval());
         if (triggerEvent && gTelnet.m_on_connect != NULL)
@@ -353,7 +352,7 @@ namespace ncore
         gTelnet.m_client.stop();
         if (triggerEvent && gTelnet.m_on_disconnect != NULL)
             gTelnet.m_on_disconnect(gTelnet.m_ip);
-        gTelnet.m_ip = IPAddress_t();
+        gTelnet.m_ip        = IPAddress_t();
         gTelnet.m_connected = false;
     }
 
@@ -365,7 +364,7 @@ namespace ncore
         return gTelnet.m_ip.isSet();
 #else
         // this works for ESP32, hopefully for others as well
-        //return gTelnet.m_ip.toString() != "0.0.0.0";
+        // return gTelnet.m_ip.toString() != "0.0.0.0";
         return gTelnet.m_ip[0] != 0 || gTelnet.m_ip[1] != 0 || gTelnet.m_ip[2] != 0 || gTelnet.m_ip[3] != 0;
 #endif
     }
@@ -390,8 +389,8 @@ namespace ncore
         return res;
     }
 
-    IPAddress_t telnetGetIP()  { return gTelnet.m_ip; }
-    IPAddress_t telnetGetLastAttemptIP()  { return gTelnet.m_attempt_ip; }
+    IPAddress_t telnetGetIP() { return gTelnet.m_ip; }
+    IPAddress_t telnetGetLastAttemptIP() { return gTelnet.m_attempt_ip; }
 
     void telnetOnFailedWrite()
     {
@@ -567,3 +566,5 @@ namespace ncore
     void telnetSetNewlineCharacter(char value) { gTelnet.m_newline_character = value; }
 
 }  // namespace ncore
+
+#endif

@@ -1,6 +1,5 @@
-
-#ifndef __ARDUINO_DEBUG_ESCAPE_CODES_H__
-#define __ARDUINO_DEBUG_ESCAPE_CODES_H__
+#ifndef __RTELNET_ESCAPE_CODES_H__
+#define __RTELNET_ESCAPE_CODES_H__
 
 #include "rcore/c_str.h"
 
@@ -54,4 +53,4 @@ namespace ncore
     }  // namespace nescape_codes
 };  // namespace ncore
 
-#endif
+#endif // __RTELNET_ESCAPE_CODES_H__

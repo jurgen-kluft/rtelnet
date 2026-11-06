@@ -1,5 +1,5 @@
-#ifndef __ARDUINO_DEBUG_TELNET_BASE_H__
-#define __ARDUINO_DEBUG_TELNET_BASE_H__
+#ifndef __RTELNET_BASE_H__
+#define __RTELNET_BASE_H__
 
 #define ASCII_BELL             7
 #define ASCII_BACKSPACE        8
@@ -9,6 +9,7 @@
 #define MAX_ERRORS_ON_WRITE    3
 
 #include "ccore/c_va_list.h"
+#include "rcore/c_ipaddress.h"
 #include "rcore/c_str.h"
 
 #include "rtelnet/c_macros.h"
@@ -37,7 +38,7 @@ namespace ncore
     size_t telnetWrite(byte c);
     size_t telnetWrite(const byte* data, size_t length);
 
-    s32  telnetReadBytes(byte* buffer, s32 length);
+    s32 telnetReadBytes(byte* buffer, s32 length);
 
     size_t telnetPrintf_(const char* format, va_t* args, s32 argc);
     // Variadic template wrapper for telnetPrintf
@@ -58,4 +59,4 @@ namespace ncore
     void telnetHandleInput();
 
 }  // namespace ncore
-#endif  // __ARDUINO_DEBUG_TELNET_BASE_H__
+#endif  // __RTELNET_BASE_H__
